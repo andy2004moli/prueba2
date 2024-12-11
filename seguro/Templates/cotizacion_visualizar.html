@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Cotizaciones</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Cotizaciones</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Vigencia</th>
+                <th>Vencimiento</th>
+                <th>Tipo de Póliza</th>
+                <th>Valor Asegurado</th>
+                <th>Tasa (%)</th>
+                <th>Prima</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cotizacion in cotizaciones %}
+                <tr>
+                    <td>{{ cotizacion.id }}</td>
+                    <td>{{ cotizacion.cliente.names }}</td>
+                    <td>{{ cotizacion.vigencia }}</td>
+                    <td>{{ cotizacion.vencimiento }}</td>
+                    <td>{{ cotizacion.tipo_poliza }}</td>
+                    <td>${{ cotizacion.valor_asegurado }}</td>
+                    <td>{{ cotizacion.tasa }}%</td>
+                    <td>${{ cotizacion.prima }}</td>
+                    <td>${{ cotizacion.total }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="9" style="text-align: center;">No hay cotizaciones registradas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
